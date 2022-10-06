@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>iot-common-profiles</module>
+        <module>iot-common-base</module>
     </modules>
 
     <properties>

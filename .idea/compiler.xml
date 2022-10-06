@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="iot-common-profiles" />
         <module name="iot-center-auth" />
+        <module name="iot-common-base" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
