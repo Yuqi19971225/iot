@@ -1,0 +1,9 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.iot.common.config.RestTemplateConfig,\
+  com.iot.common.config.MybatisPlusConfig,\
+  com.iot.common.config.RedisTemplateConfig,\
+  com.iot.common.config.RedisCacheConfig,\
+  com.iot.common.config.ThreadPoolConfig,\
+  com.iot.common.config.WebMvcConfig,\
+  com.iot.common.utils.RedisUtil,\
+  com.iot.common.annotation.LogsAspect
