@@ -312,9 +312,9 @@
                 <scope>compile</scope>
             </dependency>
             <dependency>
-                <groupId>com.dc3</groupId>
-                <artifactId>dc3-common-profiles</artifactId>
-                <version>${project.version}</version>
+                <groupId>com.iot</groupId>
+                <artifactId>iot-common-profiles</artifactId>
+                <version>2022.10</version>
                 <scope>compile</scope>
             </dependency>
         </dependencies>
