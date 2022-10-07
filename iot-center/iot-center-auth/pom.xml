@@ -21,12 +21,33 @@
 
     <dependencies>
 
-
+        <!-- Dc3 Api -->
         <dependency>
-            <groupId>com.dc3</groupId>
-            <artifactId>dc3-common-core</artifactId>
-            <version>2022.1.0</version>
+            <groupId>com.iot</groupId>
+            <artifactId>iot-api-auth</artifactId>
         </dependency>
+
+        <!-- Dc3 Common Core -->
+        <dependency>
+            <groupId>com.iot</groupId>
+            <artifactId>iot-common-core</artifactId>
+        </dependency>
+
+        <!-- Dc3 Common Profiles -->
+        <dependency>
+            <groupId>com.iot</groupId>
+            <artifactId>iot-common-profiles</artifactId>
+        </dependency>
+
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

@@ -254,9 +254,9 @@
 
             <!-- Dc3 Api -->
             <dependency>
-                <groupId>com.dc3</groupId>
-                <artifactId>dc3-api-auth</artifactId>
-                <version>${project.version}</version>
+                <groupId>com.iot</groupId>
+                <artifactId>iot-api-auth</artifactId>
+                <version>2022.10</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
