@@ -40,7 +40,11 @@ public class UserApi implements UserClient {
 
     @Override
     public R<Boolean> delete(String id) {
-        return null;
+        try {
+            return userService.delete(id) ? R.ok() : R.fail();
+        } catch (Exception e) {
+            return R.fail(e.getMessage());
+        }
     }
 
     @Override

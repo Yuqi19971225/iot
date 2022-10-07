@@ -1,6 +1,5 @@
 package com.iot.center.auth.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.iot.common.base.Service;
 import com.iot.common.dto.UserDto;
 import com.iot.common.model.User;
