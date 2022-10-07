@@ -1,0 +1,16 @@
+{
+  "groups": [
+    {
+      "name": "server",
+      "type": "com.iot.common.config.ThreadPoolConfig",
+      "sourceType": "com.iot.common.config.ThreadPoolConfig"
+    },
+    {
+      "name": "spring.cache.redis",
+      "type": "com.iot.common.config.RedisCacheConfig",
+      "sourceType": "com.iot.common.config.RedisCacheConfig"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
