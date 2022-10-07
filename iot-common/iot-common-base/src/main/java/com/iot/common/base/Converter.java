@@ -20,5 +20,5 @@ public interface Converter<DO, DTO> {
      * @description DO 转 DTO
      * @date
      */
-    void convertDoToDto(DTO d);
+    void convertDoToDto(DO d);
 }

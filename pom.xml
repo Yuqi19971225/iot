@@ -16,6 +16,7 @@
     <modules>
         <module>iot-common</module>
         <module>iot-center</module>
+        <module>iot-api</module>
     </modules>
 
     <properties>
@@ -305,9 +306,9 @@
                 <scope>compile</scope>
             </dependency>
             <dependency>
-                <groupId>com.dc3</groupId>
-                <artifactId>dc3-common-base</artifactId>
-                <version>${project.version}</version>
+                <groupId>com.iot</groupId>
+                <artifactId>iot-common-base</artifactId>
+                <version>2022.10</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>

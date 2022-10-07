@@ -11,6 +11,9 @@
 
     <artifactId>iot-common</artifactId>
     <packaging>pom</packaging>
+
+    <description>IOT DC3 平台 Common 公共模块。</description>
+
     <modules>
         <module>iot-common-profiles</module>
         <module>iot-common-base</module>

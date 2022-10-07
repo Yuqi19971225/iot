@@ -11,27 +11,17 @@
  * limitations under the License.
  */
 
-package com.iot.common.bean.batch;
+package com.iot.common.exception;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
-
-import java.io.Serializable;
-import java.util.List;
+import cn.hutool.core.util.StrUtil;
 
 /**
+ * 自定义 Null 异常
+ *
  * @author pnoker
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Accessors(chain = true)
-public class BatchDriver implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    private String serviceName;
-
-    private List<BatchProfile> profiles;
+public class NotFoundException extends RuntimeException {
+    public NotFoundException(CharSequence template, Object... params) {
+        super(StrUtil.format(template, params));
+    }
 }
