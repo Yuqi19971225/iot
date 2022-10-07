@@ -49,7 +49,15 @@ public class UserApi implements UserClient {
 
     @Override
     public R<User> update(User user) {
-        return null;
+        try {
+            User update = userService.update(user.setName(null));
+            if (update != null) {
+                return R.ok(update);
+            }
+        } catch (Exception e) {
+            return R.fail(e.getMessage());
+        }
+        return R.fail();
     }
 
     @Override

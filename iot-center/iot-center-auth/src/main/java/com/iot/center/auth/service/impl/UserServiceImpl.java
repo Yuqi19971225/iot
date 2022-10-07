@@ -12,10 +12,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.iot.common.annotation.Logs;
 import com.iot.common.constant.CacheConstant;
 import com.iot.common.dto.UserDto;
-import com.iot.common.exception.AddException;
-import com.iot.common.exception.DuplicateException;
-import com.iot.common.exception.EmptyException;
-import com.iot.common.exception.NotFoundException;
+import com.iot.common.exception.*;
 import com.iot.common.model.User;
 import com.iot.common.utils.Dc3Util;
 import lombok.extern.slf4j.Slf4j;
@@ -110,8 +107,56 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public User update(User type) {
-        return null;
+    @Transactional
+    @Caching(
+            put = {
+                    @CachePut(value = CacheConstant.Entity.USER + CacheConstant.Suffix.ID, key = "#user.id", condition = "#result!=null"),
+                    @CachePut(value = CacheConstant.Entity.USER + CacheConstant.Suffix.NAME, key = "#user.name", condition = "#result!=null"),
+                    @CachePut(value = CacheConstant.Entity.USER + CacheConstant.Suffix.PHONE, key = "#user.phone", condition = "#result!=null&&#user.phone!=null"),
+                    @CachePut(value = CacheConstant.Entity.USER + CacheConstant.Suffix.EMAIL, key = "#user.email", condition = "#result!=null&&#user.email!=null")
+            },
+            evict = {
+                    @CacheEvict(value = CacheConstant.Entity.USER + CacheConstant.Suffix.PHONE, allEntries = true, condition = "#result!=null"),
+                    @CacheEvict(value = CacheConstant.Entity.USER + CacheConstant.Suffix.EMAIL, allEntries = true, condition = "#result!=null"),
+                    @CacheEvict(value = CacheConstant.Entity.USER + CacheConstant.Suffix.DIC, allEntries = true, condition = "#result!=null"),
+                    @CacheEvict(value = CacheConstant.Entity.USER + CacheConstant.Suffix.LIST, allEntries = true, condition = "#result!=null")
+            }
+
+    )
+    public User update(User user) {
+        User byId = userMapper.selectById(user.getId());
+
+        //判断手机号是否修改
+        if (StrUtil.isNotBlank(user.getPhone())) {
+            //输入的手机号和数据库中的手机号不相等，要修改
+            if (byId.getPhone() == null || !byId.getPhone().equals(user.getPhone())) {
+                //判断输入的手机号是否存在
+                if (selectByPhone(user.getPhone(), false) != null) {
+                    throw new DuplicateException("The user already exists with phone {}", user.getPhone());
+                }
+            } else { //不用修改
+                user.setPhone(null);
+            }
+        }
+
+        //判断email是否修改
+        if (StrUtil.isNotBlank(user.getEmail())) {
+            if (null == byId.getEmail() || !byId.getEmail().equals(user.getEmail())) {
+                if (null != selectByEmail(user.getEmail(), false)) {
+                    throw new DuplicateException("The user already exists with email {}", user.getEmail());
+                }
+            }
+        } else {
+            user.setEmail(null);
+        }
+
+        user.setName(null).setUpdateTime(null);
+        if (userMapper.updateById(user) > 0) {
+            User select = userMapper.selectById(user.getId());
+            user.setName(select.getName());
+            return select;
+        }
+        throw new ServiceException("The user update failed");
     }
 
     @Override
