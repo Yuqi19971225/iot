@@ -17,6 +17,7 @@
     <modules>
         <module>iot-common-profiles</module>
         <module>iot-common-base</module>
+        <module>iot-common-api</module>
     </modules>
 
     <properties>

@@ -7,9 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="iot-common-profiles" />
         <module name="iot-center-auth" />
         <module name="iot-common-base" />
+        <module name="iot-common-api" />
+        <module name="iot-common-profiles" />
+        <module name="iot-api-auth" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
