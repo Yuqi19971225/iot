@@ -41,7 +41,11 @@ public class TenantApi implements TenantClient {
 
     @Override
     public R<Boolean> delete(String id) {
-        return null;
+        try {
+            return tenantService.delete(id) ? R.ok() : R.fail();
+        } catch (Exception e) {
+            return R.fail(e.getMessage());
+        }
     }
 
     @Override

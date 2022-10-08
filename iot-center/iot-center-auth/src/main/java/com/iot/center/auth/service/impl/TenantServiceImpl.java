@@ -57,8 +57,20 @@ public class TenantServiceImpl extends ServiceImpl<TenantMapper, Tenant> impleme
     }
 
     @Override
+    @Caching(
+            evict = {
+                    @CacheEvict(value = CacheConstant.Entity.TENANT + CacheConstant.Suffix.ID, key = "#id", condition = "#result==true"),
+                    @CacheEvict(value = CacheConstant.Entity.TENANT + CacheConstant.Suffix.NAME, allEntries = true, condition = "#result==true"),
+                    @CacheEvict(value = CacheConstant.Entity.TENANT + CacheConstant.Suffix.DIC, allEntries = true, condition = "#result==true"),
+                    @CacheEvict(value = CacheConstant.Entity.TENANT + CacheConstant.Suffix.LIST, allEntries = true, condition = "#result==true")
+            }
+    )
     public boolean delete(String id) {
-        return false;
+        Tenant select = selectById(id);
+        if (select == null) {
+            throw new NotFoundException("The tenant does not exists");
+        }
+        return tenantMapper.deleteById(select) > 0;
     }
 
     @Override
