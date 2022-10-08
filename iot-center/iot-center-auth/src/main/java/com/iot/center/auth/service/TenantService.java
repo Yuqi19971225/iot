@@ -1,6 +1,8 @@
 package com.iot.center.auth.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.iot.common.base.Service;
+import com.iot.common.dto.TenantDto;
 import com.iot.common.model.Tenant;
 
 /**
@@ -11,6 +13,13 @@ import com.iot.common.model.Tenant;
  * @author FYQ
  * @since 2022-10-07
  */
-public interface TenantService extends IService<Tenant> {
+public interface TenantService extends Service<Tenant, TenantDto> {
 
+    /**
+     * @param name: tenant name
+     * @return Tenant
+     * @description 根据tenant name 查询
+     * @date
+     */
+    Tenant selectByName(String name);
 }
