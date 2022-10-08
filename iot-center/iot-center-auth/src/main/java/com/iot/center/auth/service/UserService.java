@@ -52,7 +52,7 @@ public interface UserService extends Service<User, UserDto> {
     /**
      * @param id:
      * @return boolean
-     * @description 充值密码
+     * @description 重置密码
      * @date
      */
     boolean resetPassword(String id);

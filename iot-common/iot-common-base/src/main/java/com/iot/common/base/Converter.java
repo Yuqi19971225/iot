@@ -7,7 +7,7 @@ package com.iot.common.base;
 public interface Converter<DO, DTO> {
 
     /**
-     * @param d: Dto对象
+     * @param d: Do对象
      * @return void
      * @description DTO 转 DO
      * @date

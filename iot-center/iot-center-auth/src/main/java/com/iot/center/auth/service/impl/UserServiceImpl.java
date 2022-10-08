@@ -10,7 +10,9 @@ import com.iot.center.auth.mapper.UserMapper;
 import com.iot.center.auth.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.iot.common.annotation.Logs;
+import com.iot.common.bean.Pages;
 import com.iot.common.constant.CacheConstant;
+import com.iot.common.constant.CommonConstant;
 import com.iot.common.dto.UserDto;
 import com.iot.common.exception.*;
 import com.iot.common.model.User;
@@ -22,8 +24,9 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.annotation.Resource;
+import java.util.Optional;
+
 
 /**
  * <p>
@@ -166,13 +169,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public Page<User> list(UserDto dto) {
-        return null;
+    @Cacheable(value = CacheConstant.Entity.USER + CacheConstant.Suffix.LIST, keyGenerator = "commonKeyGenerator", unless = "#result==null")
+    public Page<User> list(UserDto userDto) {
+        if (!Optional.ofNullable(userDto.getPage()).isPresent()) {
+            userDto.setPage(new Pages());
+        }
+        return userMapper.selectPage(userDto.getPage().convert(), fuzzyQuery(userDto));
     }
 
     @Override
-    public LambdaQueryWrapper<User> fuzzyQuery(UserDto dto) {
-        return null;
+    public LambdaQueryWrapper<User> fuzzyQuery(UserDto userDto) {
+        LambdaQueryWrapper<User> queryWrapper = Wrappers.<User>query().lambda();
+        if (userDto != null) {
+            if (StrUtil.isNotBlank(userDto.getName())) {
+                queryWrapper.like(User::getName, userDto.getName());
+            }
+        }
+        return queryWrapper;
     }
 
 
@@ -212,15 +225,33 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return selectByKey(User::getEmail, email, isEx);
     }
 
-    //TODO
     @Override
     public boolean checkUserValid(String name) {
+        User user = selectByName(name, false);
+        if (user != null) {
+            return user.getEnable();
+        }
+
+        user = selectByPhone(name, false);
+        if (user != null) {
+            return user.getEnable();
+        }
+
+        user = selectByEmail(name, false);
+        if (user != null) {
+            return user.getEnable();
+        }
+
         return false;
     }
 
-    //TODE
     @Override
     public boolean resetPassword(String id) {
+        User user = selectById(id);
+        if (user != null) {
+            user.setPassword(Dc3Util.md5(CommonConstant.Algorithm.DEFAULT_PASSWORD));
+            return update(user) != null;
+        }
         return false;
     }
 
@@ -235,6 +266,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return null;
         }
         return user;
-
     }
+
 }
