@@ -1,11 +1,13 @@
 package com.iot.center.auth.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.iot.center.auth.mapper.TenantMapper;
 import com.iot.center.auth.service.TenantService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.iot.common.bean.Pages;
 import com.iot.common.constant.CacheConstant;
 import com.iot.common.dto.TenantDto;
 import com.iot.common.exception.DuplicateException;
@@ -17,8 +19,8 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
+import java.util.Optional;
 
 /**
  * <p>
@@ -74,23 +76,51 @@ public class TenantServiceImpl extends ServiceImpl<TenantMapper, Tenant> impleme
     }
 
     @Override
-    public Tenant update(Tenant type) {
-        return null;
+    @Caching(
+            put = {
+                    @CachePut(value = CacheConstant.Entity.TENANT + CacheConstant.Suffix.ID, key = "#tenant.id", condition = "#result!=null"),
+                    @CachePut(value = CacheConstant.Entity.TENANT + CacheConstant.Suffix.NAME, key = "#tenant.name", condition = "#result!=null")
+            },
+            evict = {
+                    @CacheEvict(value = CacheConstant.Entity.TENANT + CacheConstant.Suffix.DIC, allEntries = true, condition = "#result!=null"),
+                    @CacheEvict(value = CacheConstant.Entity.TENANT + CacheConstant.Suffix.LIST, allEntries = true, condition = "#result!=null")
+            }
+    )
+    public Tenant update(Tenant tenant) {
+        tenant.setName(null).setCreateTime(null);
+        if (tenantMapper.updateById(tenant) > 0) {
+            Tenant select = tenantMapper.selectById(tenant.getId());
+            tenant.setName(select.getName());
+            return select;
+        }
+        throw new ServiceException("Update tenant failed");
+
     }
 
     @Override
+    @Cacheable(value = CacheConstant.Entity.TENANT + CacheConstant.Suffix.ID, key = "#id", unless = "#result==null")
     public Tenant selectById(String id) {
-        return null;
+        return tenantMapper.selectById(id);
     }
 
     @Override
-    public Page<Tenant> list(TenantDto dto) {
-        return null;
+    @Cacheable(value = CacheConstant.Entity.TENANT + CacheConstant.Suffix.LIST, keyGenerator = "commonKeyGenerator")
+    public Page<Tenant> list(TenantDto tenantDto) {
+        if (Optional.ofNullable(tenantDto.getPage()).isPresent()) {
+            tenantDto.setPage(new Pages());
+        }
+        return tenantMapper.selectPage(tenantDto.getPage().convert(), fuzzyQuery(tenantDto));
     }
 
     @Override
-    public LambdaQueryWrapper<Tenant> fuzzyQuery(TenantDto dto) {
-        return null;
+    public LambdaQueryWrapper<Tenant> fuzzyQuery(TenantDto tenantDto) {
+        LambdaQueryWrapper<Tenant> queryWrapper = Wrappers.<Tenant>query().lambda();
+        if (tenantDto != null) {
+            if (StrUtil.isNotBlank(tenantDto.getName())) {
+                queryWrapper.like(Tenant::getName, tenantDto.getName());
+            }
+        }
+        return queryWrapper;
     }
 
     @Override

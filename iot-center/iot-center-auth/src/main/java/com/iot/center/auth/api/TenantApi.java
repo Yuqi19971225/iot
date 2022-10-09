@@ -50,21 +50,54 @@ public class TenantApi implements TenantClient {
 
     @Override
     public R<Tenant> update(Tenant tenant) {
-        return null;
+        try {
+            Tenant update = tenantService.update(tenant.setName(null));
+            if (tenant != null) {
+                return R.ok(tenant);
+            }
+        } catch (Exception e) {
+            return R.fail(e.getMessage());
+        }
+        return R.fail();
     }
 
     @Override
     public R<Tenant> selectById(String id) {
-        return null;
+        try {
+            Tenant select = tenantService.selectById(id);
+            if (select != null) {
+                return R.ok(select);
+            }
+        } catch (Exception e) {
+            return R.fail(e.getMessage());
+        }
+        return R.fail("Resource does not exits");
     }
 
     @Override
     public R<Tenant> selectByName(String name) {
-        return null;
+        try {
+            Tenant select = tenantService.selectByName(name);
+            if (select != null) {
+                return R.ok(select);
+            }
+        } catch (Exception e) {
+            return R.fail(e.getMessage());
+        }
+        return R.fail("Resource does not exits");
     }
 
     @Override
     public R<Page<Tenant>> list(TenantDto tenantDto) {
-        return null;
+        try {
+            Page<Tenant> page = tenantService.list(tenantDto);
+            if (page != null) {
+                return R.ok(page);
+            }
+        } catch (Exception e) {
+            return R.fail(e.getMessage());
+        }
+        return R.fail("Resource dose not exits");
     }
+
 }
