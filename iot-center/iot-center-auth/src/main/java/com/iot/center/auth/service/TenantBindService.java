@@ -1,6 +1,9 @@
 package com.iot.center.auth.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.iot.common.base.Service;
+import com.iot.common.dto.TenantBindDto;
+import com.iot.common.model.Tenant;
 import com.iot.common.model.TenantBind;
 
 /**
@@ -11,6 +14,14 @@ import com.iot.common.model.TenantBind;
  * @author FYQ
  * @since 2022-10-07
  */
-public interface TenantBindService extends IService<TenantBind> {
+public interface TenantBindService extends Service<TenantBind, TenantBindDto> {
 
+    /**
+     * @param tenantId:
+     * @param userId:
+     * @return TenantBind
+     * @description 根据租户id和用户id查询
+     * @date
+     */
+    TenantBind selectByTenantIdAndUserId(String tenantId, String userId);
 }
