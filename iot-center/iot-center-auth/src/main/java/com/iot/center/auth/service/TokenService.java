@@ -1,5 +1,7 @@
 package com.iot.center.auth.service;
 
+import com.iot.center.auth.bean.TokenValid;
+
 /**
  * @author ：FYQ
  * @description： Token interface
@@ -24,4 +26,22 @@ public interface TokenService {
      * @date
      */
     String generateToken(String tenant, String name, String salt, String password);
+
+    /**
+     * @param name:
+     * @param salt:
+     * @param token:
+     * @return TokenValid
+     * @description 检测用户的token是否有效
+     * @date
+     */
+    TokenValid checkTokenValid(String name, String salt, String token);
+
+    /**
+     * @param name:
+     * @return boolean
+     * @description 注销用户token令牌
+     * @date
+     */
+    boolean cancelToken(String name);
 }

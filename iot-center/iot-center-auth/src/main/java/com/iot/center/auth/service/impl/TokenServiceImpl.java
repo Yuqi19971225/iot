@@ -2,6 +2,7 @@ package com.iot.center.auth.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
+import com.iot.center.auth.bean.TokenValid;
 import com.iot.center.auth.bean.UserLimit;
 import com.iot.center.auth.service.TenantBindService;
 import com.iot.center.auth.service.TenantService;
@@ -15,6 +16,7 @@ import com.iot.common.model.User;
 import com.iot.common.utils.Dc3Util;
 import com.iot.common.utils.KeyUtil;
 import com.iot.common.utils.RedisUtil;
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -67,14 +69,36 @@ public class TokenServiceImpl implements TokenService {
             if (StrUtil.isNotBlank(tempSalt) && tempSalt.equals(salt)) { //redis中的salt与传入的salt相同
                 if (Dc3Util.md5(tempUser.getPassword() + tempSalt).equals(password)) {
                     String redisTokenKey = CacheConstant.Entity.USER + CacheConstant.Suffix.TOKEN + CommonConstant.Symbol.SEPARATOR + name;
-                    String token = KeyUtil.generateToken(name,tempSalt);
-                    redisUtil.setKey(redisTokenKey,token,CacheConstant.Timeout.TOKEN_CACHE_TIMEOUT,TimeUnit.HOURS);
+                    String token = KeyUtil.generateToken(name, tempSalt);
+                    redisUtil.setKey(redisTokenKey, token, CacheConstant.Timeout.TOKEN_CACHE_TIMEOUT, TimeUnit.HOURS);
                     return token;
                 }
             }
         }
-        updateUserLimit(name,true);
-        throw  new ServiceException("Invalid tenant、username、password");
+        updateUserLimit(name, true);
+        throw new ServiceException("Invalid tenant、username、password");
+    }
+
+    @Override
+    public TokenValid checkTokenValid(String name, String salt, String token) {
+        String redisKey = CacheConstant.Entity.USER + CacheConstant.Suffix.TOKEN + CommonConstant.Symbol.SEPARATOR + name;
+        String redisToken = redisUtil.getKey(redisKey, String.class);
+        if (StrUtil.isBlank(redisToken) || !redisToken.equals(token)) {
+            return new TokenValid(false, null);
+        }
+        try {
+            Claims claims = KeyUtil.parserToken(name, salt, token);
+            return new TokenValid(true, claims.getExpiration());
+        } catch (Exception e) {
+            return new TokenValid(false, null);
+        }
+    }
+
+    @Override
+    public boolean cancelToken(String name) {
+        String redisKey = CacheConstant.Entity.USER + CacheConstant.Suffix.TOKEN + CommonConstant.Symbol.SEPARATOR + name;
+        redisUtil.deleteKey(redisKey);
+        return true;
     }
 
     /**
