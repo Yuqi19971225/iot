@@ -18,7 +18,7 @@ server:
       worker: 20
     buffer-size: 512
   thread:
-    prefix: dc3-thread-
+    prefix: iot-thread-
     core-pool-size: 4
     maximum-pool-size: 32
     keep-alive-time: 15

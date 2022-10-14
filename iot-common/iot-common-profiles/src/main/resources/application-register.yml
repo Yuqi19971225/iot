@@ -20,7 +20,7 @@ spring:
 eureka:
   instance:
     prefer-ip-address: true
-    hostname: @project.artifactId@
+    hostname: iot-center-register
     status-page-url-path: /actuator/info
     health-check-url-path: /actuator/health
     lease-renewal-interval-in-seconds: 10
@@ -28,8 +28,8 @@ eureka:
   client:
     region: dc3
     availability-zones:
-      dc3: defaultZone
+      iot: defaultZone
     prefer-same-zone-eureka: true
     registry-fetch-interval-seconds: 5
     service-url:
-      defaultZone: http://dc3:dc3@localhost:8100/eureka/
+      defaultZone: http://localhost:8100/eureka/

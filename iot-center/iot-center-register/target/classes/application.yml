@@ -11,25 +11,28 @@
 # limitations under the License.
 #
 
+server:
+  port: 8100
+
 spring:
-  security:
-    user:
-      name: dc3
-      password: dc3
+  application:
+    name: iot-center-register
+  profiles:
+    active:
+      - server
+      - register
+      - monitor
+      - dev
+
+logging:
+  level:
+    com.iot: DEBUG
+  file:
+    name: iot/logs/center/register/${spring.application.name}.log
 
 eureka:
-  instance:
-    prefer-ip-address: true
-    hostname: iot-center-register
-    status-page-url-path: /actuator/info
-    health-check-url-path: /actuator/health
-    lease-renewal-interval-in-seconds: 10
-    lease-expiration-duration-in-seconds: 15
-  client:
-    region: dc3
-    availability-zones:
-      iot: defaultZone
-    prefer-same-zone-eureka: true
-    registry-fetch-interval-seconds: 5
-    service-url:
-      defaultZone: http://localhost:8100/eureka/
+  dashboard:
+    path: /
+  server:
+    eviction-interval-timer-in-ms: 5000
+    renewal-percent-threshold: 0.9

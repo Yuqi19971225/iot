@@ -10,6 +10,7 @@
         <module name="iot-common-core" />
         <module name="iot-center-auth" />
         <module name="iot-gateway" />
+        <module name="iot-center-register" />
         <module name="iot-common-api" />
         <module name="iot-common-base" />
         <module name="iot-common-profiles" />

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>iot-center</artifactId>
+        <groupId>com.iot</groupId>
+        <version>2022.10</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>iot-center-register</artifactId>
+    <packaging>jar</packaging>
+
+    <description>IOT DC3 平台 服务注册与发现中心。</description>
+
+    <dependencies>
+
+        <!-- Eureka Server-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+        </dependency>
+
+        <!-- Security -->
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+        </dependency>
+
+        <!-- Dc3 Common Profiles -->
+        <dependency>
+            <groupId>com.iot</groupId>
+            <artifactId>iot-common-profiles</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>

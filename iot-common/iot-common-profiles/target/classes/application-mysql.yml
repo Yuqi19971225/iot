@@ -14,10 +14,10 @@
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://${MYSQL_HOST:dc3-mysql}:${MYSQL_PORT:3306}/dc3?allowPublicKeyRetrieval=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/dc3?allowPublicKeyRetrieval=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${MYSQL_USERNAME:root}
-    password: ${MYSQL_PASSWORD:dc3}
+    username: root
+    password: root
     hikari:
       pool-name: dc3-hikaricp
       max-lifetime: 1765000
