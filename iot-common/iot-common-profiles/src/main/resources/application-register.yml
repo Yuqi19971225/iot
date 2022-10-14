@@ -14,8 +14,8 @@
 spring:
   security:
     user:
-      name: ${SECURITY_USER_NAME:dc3}
-      password: ${SECURITY_USER_PASSWORD:dc3}
+      name: dc3
+      password: dc3
 
 eureka:
   instance:
@@ -32,4 +32,4 @@ eureka:
     prefer-same-zone-eureka: true
     registry-fetch-interval-seconds: 5
     service-url:
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${EUREKA_HOST:dc3-center-register}:${EUREKA_PORT:8100}/eureka/
+      defaultZone: http://dc3:dc3@localhost:8100/eureka/
