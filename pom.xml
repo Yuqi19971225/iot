@@ -17,6 +17,7 @@
         <module>iot-common</module>
         <module>iot-center</module>
         <module>iot-api</module>
+        <module>iot-gateway</module>
     </modules>
 
     <properties>
@@ -259,38 +260,38 @@
                 <version>2022.10</version>
                 <scope>compile</scope>
             </dependency>
-            <dependency>
-                <groupId>com.dc3</groupId>
-                <artifactId>dc3-api-manager</artifactId>
-                <version>${project.version}</version>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.dc3</groupId>
-                <artifactId>dc3-api-data</artifactId>
-                <version>${project.version}</version>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.dc3</groupId>
-                <artifactId>dc3-api-rtmp</artifactId>
-                <version>${project.version}</version>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.dc3</groupId>
-                <artifactId>dc3-api-driver</artifactId>
-                <version>${project.version}</version>
-                <scope>compile</scope>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.dc3</groupId>-->
+<!--                <artifactId>dc3-api-manager</artifactId>-->
+<!--                <version>${project.version}</version>-->
+<!--                <scope>compile</scope>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>com.dc3</groupId>-->
+<!--                <artifactId>dc3-api-data</artifactId>-->
+<!--                <version>${project.version}</version>-->
+<!--                <scope>compile</scope>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>com.dc3</groupId>-->
+<!--                <artifactId>dc3-api-rtmp</artifactId>-->
+<!--                <version>${project.version}</version>-->
+<!--                <scope>compile</scope>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>com.dc3</groupId>-->
+<!--                <artifactId>dc3-api-driver</artifactId>-->
+<!--                <version>${project.version}</version>-->
+<!--                <scope>compile</scope>-->
+<!--            </dependency>-->
 
             <!-- Dc3 Driver Sdk  -->
-            <dependency>
-                <groupId>com.dc3</groupId>
-                <artifactId>dc3-common-sdk</artifactId>
-                <version>${project.version}</version>
-                <scope>compile</scope>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.dc3</groupId>-->
+<!--                <artifactId>dc3-common-sdk</artifactId>-->
+<!--                <version>${project.version}</version>-->
+<!--                <scope>compile</scope>-->
+<!--            </dependency>-->
 
             <!-- Dc3 Common -->
             <dependency>
