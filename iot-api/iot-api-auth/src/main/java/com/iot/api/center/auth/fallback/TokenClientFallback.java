@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class TokenClientFallback implements FallbackFactory<TokenClient> {
     @Override
     public TokenClient create(Throwable cause) {
-        String message = cause.getMessage() == null ? "No available server for client: DC3-CENTER-AUTH" : cause.getMessage();
+        String message = cause.getMessage() == null ? "No available server for client: IOT-CENTER-AUTH" : cause.getMessage();
         log.error("Fallback:{}", message);
         return new TokenClient() {
             @Override

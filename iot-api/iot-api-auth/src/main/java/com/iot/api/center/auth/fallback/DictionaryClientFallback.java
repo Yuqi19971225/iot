@@ -19,7 +19,7 @@ import java.util.List;
 public class DictionaryClientFallback implements FallbackFactory<DictionaryClient> {
     @Override
     public DictionaryClient create(Throwable cause) {
-        String message = cause.getMessage() == null ? "No available server for client: DC3-CENTER-AUTH" : cause.getMessage();
+        String message = cause.getMessage() == null ? "No available server for client: IOT-CENTER-AUTH" : cause.getMessage();
         log.error("fallback:{}", message);
         return new DictionaryClient() {
             @Override
