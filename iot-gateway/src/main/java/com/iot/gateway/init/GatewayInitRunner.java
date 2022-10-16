@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @EnableFeignClients(basePackages = {
-        "com.iot.api.auth.*"
+        "com.iot.api.center.auth.*"
 })
 @ComponentScan(basePackages = {
         "com.iot.api.center.auth"

@@ -39,7 +39,7 @@ spring:
       routes:
         # auth
         - id: auth_route
-          uri: lb://dc3-center-auth
+          uri: lb://iot-center-auth
           predicates:
             - Path=/api/v3/auth/user/**,/api/v3/auth/black_ip/**,/api/v3/auth/tenant/**,/api/v3/auth/dictionary/**
           filters:
@@ -56,7 +56,7 @@ spring:
                 fallbackUri: 'forward:/fallback'
         # manager
         - id: manager_route
-          uri: lb://dc3-center-manager
+          uri: lb://iot-center-manager
           predicates:
             - Path=/api/v3/manager/**
           filters:
@@ -73,7 +73,7 @@ spring:
                 fallbackUri: 'forward:/fallback'
         # data
         - id: data_route
-          uri: lb://dc3-center-data
+          uri: lb://iot-center-data
           predicates:
             - Path=/api/v3/data/**
           filters:
@@ -90,7 +90,7 @@ spring:
                 fallbackUri: 'forward:/fallback'
         # rtmp
         - id: rtmp_route
-          uri: lb://dc3-transfer-rtmp
+          uri: lb://iot-transfer-rtmp
           predicates:
             - Path=/api/v3/rtmp/**
           filters:

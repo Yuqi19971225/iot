@@ -7,7 +7,7 @@ import com.iot.common.bean.R;
 import com.iot.common.constant.ServiceConstant;
 import com.iot.common.exception.ServiceException;
 import com.iot.common.model.Tenant;
-import com.iot.common.utils.Dc3Util;
+import com.iot.common.utils.IotUtil;
 import com.iot.common.utils.JsonUtil;
 import com.iot.gateway.utils.GatewayUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -26,8 +26,6 @@ import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * @author ：FYQ
@@ -63,7 +61,7 @@ public class AuthenticGatewayFilterFactory extends AbstractGatewayFilterFactory<
 
             try {
                 String cookieToken = GatewayUtil.getRequestCookie(request, ServiceConstant.Header.X_AUTH_TOKEN);
-                Login login = JsonUtil.parseObject(Dc3Util.decode(cookieToken), Login.class);
+                Login login = JsonUtil.parseObject(IotUtil.decode(cookieToken), Login.class);
                 log.debug("Request cookies: {}", login);
 
                 R<Tenant> tenantR = gatewayFilter.tenantClient.selectByName(login.getTenant());

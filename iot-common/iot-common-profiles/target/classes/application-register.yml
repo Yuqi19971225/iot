@@ -26,7 +26,7 @@ eureka:
     lease-renewal-interval-in-seconds: 10
     lease-expiration-duration-in-seconds: 15
   client:
-    region: dc3
+    region: iot
     availability-zones:
       iot: defaultZone
     prefer-same-zone-eureka: true

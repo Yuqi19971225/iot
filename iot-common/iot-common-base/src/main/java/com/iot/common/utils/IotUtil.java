@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
  * @author pnoker
  */
 @Slf4j
-public class Dc3Util {
+public class IotUtil {
     /**
      * SimpleDateFormat ThreadLocal 保证线程安全
      */

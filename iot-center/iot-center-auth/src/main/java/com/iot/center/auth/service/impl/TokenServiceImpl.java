@@ -13,7 +13,7 @@ import com.iot.common.constant.CommonConstant;
 import com.iot.common.exception.ServiceException;
 import com.iot.common.model.Tenant;
 import com.iot.common.model.User;
-import com.iot.common.utils.Dc3Util;
+import com.iot.common.utils.IotUtil;
 import com.iot.common.utils.KeyUtil;
 import com.iot.common.utils.RedisUtil;
 import io.jsonwebtoken.Claims;
@@ -67,7 +67,7 @@ public class TokenServiceImpl implements TokenService {
             String redisKey = CacheConstant.Entity.USER + CacheConstant.Suffix.SALT + CommonConstant.Symbol.SEPARATOR + name;
             String tempSalt = redisUtil.getKey(redisKey, String.class);
             if (StrUtil.isNotBlank(tempSalt) && tempSalt.equals(salt)) { //redis中的salt与传入的salt相同
-                if (Dc3Util.md5(tempUser.getPassword() + tempSalt).equals(password)) {
+                if (IotUtil.md5(tempUser.getPassword() + tempSalt).equals(password)) {
                     String redisTokenKey = CacheConstant.Entity.USER + CacheConstant.Suffix.TOKEN + CommonConstant.Symbol.SEPARATOR + name;
                     String token = KeyUtil.generateToken(name, tempSalt);
                     redisUtil.setKey(redisTokenKey, token, CacheConstant.Timeout.TOKEN_CACHE_TIMEOUT, TimeUnit.HOURS);
@@ -115,7 +115,7 @@ public class TokenServiceImpl implements TokenService {
             long interval = limit.getExpireTime().getTime() - now.getTime();
             if (interval > 0) {
                 limit = updateUserLimit(username, false);
-                throw new ServiceException("Access restricted，Please try again after {}", Dc3Util.formatCompleteData(limit.getExpireTime()));
+                throw new ServiceException("Access restricted，Please try again after {}", IotUtil.formatCompleteData(limit.getExpireTime()));
             }
         }
     }
@@ -141,7 +141,7 @@ public class TokenServiceImpl implements TokenService {
             amount = CacheConstant.Timeout.USER_LIMIT_TIMEOUT * userLimit.getTimes();
         }
         if (expireTime) { //失效了则推迟时间
-            userLimit.setExpireTime(Dc3Util.expireTime(amount, Calendar.MINUTE));
+            userLimit.setExpireTime(IotUtil.expireTime(amount, Calendar.MINUTE));
         }
         redisUtil.setKey(redisKey, userLimit, 1, TimeUnit.DAYS);
         return userLimit;

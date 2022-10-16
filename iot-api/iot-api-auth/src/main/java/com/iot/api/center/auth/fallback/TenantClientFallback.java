@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class TenantClientFallback implements FallbackFactory<TenantClient> {
     @Override
     public TenantClient create(Throwable throwable) {
-        String message = throwable.getMessage() == null ? "No available server for client: DC3-CENTER-AUTH" : throwable.getMessage();
+        String message = throwable.getMessage() == null ? "No available server for client: IOT-CENTER-AUTH" : throwable.getMessage();
         log.error("Fallback:{}", message);
 
         return new TenantClient() {

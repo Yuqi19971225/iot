@@ -16,7 +16,7 @@ import com.iot.common.constant.CommonConstant;
 import com.iot.common.dto.UserDto;
 import com.iot.common.exception.*;
 import com.iot.common.model.User;
-import com.iot.common.utils.Dc3Util;
+import com.iot.common.utils.IotUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -82,7 +82,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
 
         // 插入 user 数据，并返回插入后的 user
-        if (userMapper.insert(user.setPassword(Dc3Util.md5(user.getPassword()))) > 0) {
+        if (userMapper.insert(user.setPassword(IotUtil.md5(user.getPassword()))) > 0) {
             return userMapper.selectById(user.getId());
         }
 
@@ -249,7 +249,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public boolean resetPassword(String id) {
         User user = selectById(id);
         if (user != null) {
-            user.setPassword(Dc3Util.md5(CommonConstant.Algorithm.DEFAULT_PASSWORD));
+            user.setPassword(IotUtil.md5(CommonConstant.Algorithm.DEFAULT_PASSWORD));
             return update(user) != null;
         }
         return false;

@@ -12,6 +12,7 @@ import com.iot.common.model.BlackIp;
 import com.iot.common.model.Tenant;
 import com.iot.common.model.User;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import java.util.List;
  * @description：TODO
  * @date ：2022/10/11 20:57
  */
+@Service
 public class DictionaryServiceImpl implements DictionaryService {
     @Resource
     private UserMapper userMapper;

@@ -3,7 +3,7 @@ server:
     build:
       context: ../iot-center/iot-center-auth/
       dockerfile: ./Dockerfile
-    image: pnoker/dc3-center-auth:1.0.0
+    image: pnoker/iot-center-auth:1.0.0
     restart: always
     ports:
       - 8300:8300
@@ -17,14 +17,14 @@ server:
       - REDIS_PORT=6379
       - REDIS_PASSWORD=dc3
       - CACHE_REDIS_TIME_TO_LIVE=6H
-      - EUREKA_HOST=dc3-center-register
+      - EUREKA_HOST=iot-center-register
       - EUREKA_PORT=8100
       - SECURITY_USER_NAME=dc3
       - SECURITY_USER_PASSWORD=dc3
-    container_name: dc3-center-auth
-    hostname: dc3-center-auth
+    container_name: iot-center-auth
+    hostname: iot-center-auth
     volumes:
-      - logs:/dc3-center/dc3-center-auth/dc3/logs
+      - logs:/iot-center/iot-center-auth/iot/logs
     logging:
       driver: json-file
       options:
@@ -33,4 +33,4 @@ server:
     networks:
       dc3net:
         aliases:
-          - dc3-center-auth
+          - iot-center-auth

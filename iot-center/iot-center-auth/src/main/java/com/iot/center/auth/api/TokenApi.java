@@ -7,7 +7,7 @@ import com.iot.common.bean.Login;
 import com.iot.common.bean.R;
 import com.iot.common.constant.ServiceConstant;
 import com.iot.common.exception.UnAuthorizedException;
-import com.iot.common.utils.Dc3Util;
+import com.iot.common.utils.IotUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,7 +44,7 @@ public class TokenApi implements TokenClient {
     public R<Long> checkTokenValid(Login login) {
         TokenValid tokenValid = tokenService.checkTokenValid(login.getName(), login.getSalt(), login.getToken());
         if (tokenValid.isValid()) {
-            return R.ok(tokenValid.getExpireTime().getTime(), "The token will expire in " + Dc3Util.formatCompleteData(tokenValid.getExpireTime()));
+            return R.ok(tokenValid.getExpireTime().getTime(), "The token will expire in " + IotUtil.formatCompleteData(tokenValid.getExpireTime()));
         }
         throw new UnAuthorizedException("Token invalid");
     }
