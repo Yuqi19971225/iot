@@ -39,13 +39,13 @@ public interface TokenClient {
     R<String> generateToken(@Validated(Auth.class) @RequestBody Login login);
 
     /**
-     * @param login:
+     * @param login :
      * @return R<Long>
      * @description 检测token是否有效
      * @date
      */
     @PostMapping("/check")
-    R<Long> checkTokenValid(@Validated(Check.class) @RequestBody Login login);
+    R<String> checkTokenValid(@Validated(Check.class) @RequestBody Login login);
 
     /**
      * @param login:

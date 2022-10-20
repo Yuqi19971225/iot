@@ -7,12 +7,12 @@ spring:
   profiles:
     active:
       - server
-      - register
       - monitor
       - mysql
       - redis
       - feign
       - dev
+      - nacos
   main:
     allow-bean-definition-overriding: true
   mvc:

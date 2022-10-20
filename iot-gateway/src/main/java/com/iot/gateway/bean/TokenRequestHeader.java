@@ -14,29 +14,24 @@
  * limitations under the License.
  */
 
-package com.iot.gateway.init;
+package com.iot.gateway.bean;
 
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 /**
- * 初始化
+ * Request Token Header
  *
  * @author pnoker
  */
-@Component
-@EnableFeignClients(basePackages = {
-        "com.iot.api.center.auth.*",
-})
-@ComponentScan(basePackages = {
-        "com.iot.api.center.auth",
-})
-public class GatewayInitRunner implements ApplicationRunner {
-
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
-    }
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Accessors(chain = true)
+public class TokenRequestHeader {
+    private String salt;
+    private String token;
 }

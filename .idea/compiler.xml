@@ -10,7 +10,6 @@
         <module name="iot-common-core" />
         <module name="iot-center-auth" />
         <module name="iot-gateway" />
-        <module name="iot-center-register" />
         <module name="iot-common-api" />
         <module name="iot-common-base" />
         <module name="iot-common-profiles" />
@@ -18,6 +17,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
+      <module name="gateway" target="1.8" />
+      <module name="iot-center-register" target="1.8" />
       <module name="mybatis-plus-generater" target="1.8" />
     </bytecodeTargetLevel>
   </component>

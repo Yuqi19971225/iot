@@ -6,11 +6,15 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/iot-common/iot-common-profiles/pom.xml" />
+        <option value="$PROJECT_DIR$/dc3-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/iot-gateway/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/gateway/pom.xml" />
         <option value="$PROJECT_DIR$/iot-api-auth/pom.xml" />
+        <option value="$PROJECT_DIR$/iot-center/iot-center-register/pom.xml" />
         <option value="$PROJECT_DIR$/iot-common-base/pom.xml" />
         <option value="$PROJECT_DIR$/mybatis-plus-generater/pom.xml" />
       </set>

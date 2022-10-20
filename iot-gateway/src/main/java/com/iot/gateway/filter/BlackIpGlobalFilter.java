@@ -1,11 +1,29 @@
+/*
+ * Copyright 2022 Pnoker All Rights Reserved
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.iot.gateway.filter;
 
 import com.iot.api.center.auth.feign.BlackIpClient;
+import com.iot.common.annotation.Logs;
 import com.iot.common.bean.R;
 import com.iot.gateway.utils.GatewayUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -15,17 +33,24 @@ import reactor.core.publisher.Mono;
 import javax.annotation.Resource;
 
 /**
- * @author ：FYQ
- * @description： 自定义Ip黑名单过滤器
- * @date ：2022/10/16 14:52
+ * 自定义Ip黑名单过滤器
+ *
+ * @author pnoker
  */
 @Slf4j
 public class BlackIpGlobalFilter implements GlobalFilter, Ordered {
 
     @Resource
+    @Lazy
     private BlackIpClient blackIpClient;
 
     @Override
+    public int getOrder() {
+        return 0;
+    }
+
+    @Override
+    @Logs("BlackIp Global Filter")
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         String remoteIp = GatewayUtil.getRemoteIp(request);
@@ -37,12 +62,6 @@ public class BlackIpGlobalFilter implements GlobalFilter, Ordered {
             return exchange.getResponse().setComplete();
         }
 
-        log.info("Remote Ip: {}; Request url: {}; Response code: {}", remoteIp, request.getURI().getRawPath(), exchange.getResponse().getStatusCode());
         return chain.filter(exchange);
-    }
-
-    @Override
-    public int getOrder() {
-        return 0;
     }
 }

@@ -7,10 +7,11 @@ spring:
   profiles:
     active:
       - server
-      - register
       - monitor
       - redis
       - feign
+      - nacos
+      - dev
   main:
     allow-bean-definition-overriding: true
   thymeleaf:
@@ -27,7 +28,7 @@ spring:
     database: 0
   cache:
     redis:
-      time-to-live: 12H
+      time-to-live: ${CACHE_REDIS_TIME_TO_LIVE:12H}
   cloud:
     gateway:
       loadbalancer:
@@ -110,10 +111,11 @@ resilience4j:
   timelimiter:
     configs:
       default:
-        timeoutDuration: 15s
+        timeout-duration: 15S
 
 logging:
   level:
-    com.iot: DEBUG
+    com.alibaba.nacos: DEBUG
+    io.github.pnoker: DEBUG
   file:
     name: iot/logs/gateway/${spring.application.name}.log

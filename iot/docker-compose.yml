@@ -17,8 +17,8 @@ server:
       - REDIS_PORT=6379
       - REDIS_PASSWORD=dc3
       - CACHE_REDIS_TIME_TO_LIVE=6H
-      - EUREKA_HOST=iot-center-register
-      - EUREKA_PORT=8100
+      - NACOS_HOST=iot-center-register
+      - NACOS_PORT=8848
       - SECURITY_USER_NAME=dc3
       - SECURITY_USER_PASSWORD=dc3
     container_name: iot-center-auth

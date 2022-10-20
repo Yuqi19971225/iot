@@ -31,7 +31,7 @@ public class TokenClientFallback implements FallbackFactory<TokenClient> {
             }
 
             @Override
-            public R<Long> checkTokenValid(Login login) {
+            public R<String> checkTokenValid(Login login) {
                 return R.fail(message);
             }
 

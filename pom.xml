@@ -28,6 +28,7 @@
         <spring-boot.version>2.7.0</spring-boot.version>
         <spring-cloud.version>2021.0.3</spring-cloud.version>
         <spring-platform.version>Cairo-SR8</spring-platform.version>
+        <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
 
         <!-- 其他依赖-->
         <spring-boot-admin.version>2.7.0</spring-boot-admin.version>
@@ -108,12 +109,21 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>io.spring.platform</groupId>
                 <artifactId>platform-bom</artifactId>
                 <version>${spring-platform.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+
 
             <!-- Spring Admin -->
             <dependency>

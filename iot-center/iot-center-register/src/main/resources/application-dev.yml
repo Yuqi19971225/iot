@@ -1,7 +1,0 @@
-eureka:
-  instance:
-    # Custom node registration IP
-    ip-address: 127.0.0.1
-  server:
-    # Turn off the self-protection mechanism
-    enable-self-preservation: false
