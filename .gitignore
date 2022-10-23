@@ -15,4 +15,6 @@
 .vs
 .vscode
 .settings
-.project
+.project!
+/.idea/
+*test
