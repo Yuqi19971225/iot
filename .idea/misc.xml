@@ -5,9 +5,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/iot-common/iot-common-profiles/pom.xml" />
         <option value="$PROJECT_DIR$/dc3-gateway/pom.xml" />
-        <option value="$PROJECT_DIR$/iot-gateway/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

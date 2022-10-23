@@ -23,7 +23,7 @@ public interface ServiceConstant {
      * 权限服务相关
      */
     interface Auth {
-        String SERVICE_NAME = "IOT-CENTER-AUTH";
+        String SERVICE_NAME = "iot-center-auth";
 
         String USER_URL_PREFIX = "/auth/user";
         String TENANT_URL_PREFIX = "/auth/tenant";

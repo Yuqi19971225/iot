@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: iot-center
+    name: iot-center-auth
   profiles:
     active:
       - server
@@ -29,5 +29,6 @@ spring:
 logging:
   level:
     com.iot: DEBUG
+    com.alibaba.nacos: WARN
   file:
     name: iot/logs/center/auth/${spring.application.name}.log

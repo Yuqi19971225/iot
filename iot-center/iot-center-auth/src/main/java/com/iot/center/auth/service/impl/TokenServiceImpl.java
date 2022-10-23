@@ -67,7 +67,7 @@ public class TokenServiceImpl implements TokenService {
             String redisKey = CacheConstant.Entity.USER + CacheConstant.Suffix.SALT + CommonConstant.Symbol.SEPARATOR + name;
             String tempSalt = redisUtil.getKey(redisKey, String.class);
             if (StrUtil.isNotBlank(tempSalt) && tempSalt.equals(salt)) { //redis中的salt与传入的salt相同
-                if (IotUtil.md5(tempUser.getPassword() + tempSalt).equals(password)) {
+                if (IotUtil.md5(password).equals(tempUser.getPassword())) {
                     String redisTokenKey = CacheConstant.Entity.USER + CacheConstant.Suffix.TOKEN + CommonConstant.Symbol.SEPARATOR + name;
                     String token = KeyUtil.generateToken(name, tempSalt);
                     redisUtil.setKey(redisTokenKey, token, CacheConstant.Timeout.TOKEN_CACHE_TIMEOUT, TimeUnit.HOURS);

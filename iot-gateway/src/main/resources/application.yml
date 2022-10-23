@@ -115,7 +115,7 @@ resilience4j:
 
 logging:
   level:
-    com.alibaba.nacos: DEBUG
-    io.github.pnoker: DEBUG
+    com.alibaba.nacos: WARN
+    com.iot: DEBUG
   file:
     name: iot/logs/gateway/${spring.application.name}.log
