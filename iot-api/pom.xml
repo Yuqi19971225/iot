@@ -16,6 +16,7 @@
 
     <modules>
         <module>iot-api-auth</module>
+        <module>iot-api-manager</module>
     </modules>
 
     <properties>

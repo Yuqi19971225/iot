@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>iot-center</artifactId>
+        <groupId>com.iot</groupId>
+        <version>2022.10</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>iot-center-manager</artifactId>
+    <packaging>jar</packaging>
+
+    <description>IOT DC3 平台 全部设备集合管理服务，包括设备组注册、权限管理、设备管理等功能。</description>
+
+    <dependencies>
+
+        <!-- Spring MongoDB-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+
+        <!-- Spring RabbitMq -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+        <!-- Dc3 Api -->
+        <dependency>
+            <groupId>com.iot</groupId>
+            <artifactId>iot-api-auth</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iot</groupId>
+            <artifactId>iot-api-manager</artifactId>
+            <version>2022.10</version>
+        </dependency>
+
+        <!-- Dc3 Common Core -->
+        <dependency>
+            <groupId>com.iot</groupId>
+            <artifactId>iot-common-core</artifactId>
+        </dependency>
+
+        <!-- Dc3 Common Profiles -->
+        <dependency>
+            <groupId>com.iot</groupId>
+            <artifactId>iot-common-profiles</artifactId>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+</project>
