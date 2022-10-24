@@ -1,5 +1,6 @@
 package com.iot.center.auth.api;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.iot.api.center.auth.feign.BlackIpClient;
 import com.iot.center.auth.service.BlackIpService;
@@ -29,7 +30,7 @@ public class BlackIpApi implements BlackIpClient {
     public R<BlackIp> add(BlackIp blackIp) {
         try {
             BlackIp add = blackIpService.add(blackIp);
-            if (add != null) {
+            if (ObjectUtil.isNotNull(add)) {
                 return R.ok(add);
             }
         } catch (Exception e) {
@@ -53,7 +54,7 @@ public class BlackIpApi implements BlackIpClient {
     public R<BlackIp> update(BlackIp blackIp) {
         try {
             BlackIp update = blackIpService.update(blackIp);
-            if (update != null) {
+            if (ObjectUtil.isNotNull(update)) {
                 return R.ok(update);
             }
         } catch (Exception e) {
@@ -66,7 +67,7 @@ public class BlackIpApi implements BlackIpClient {
     public R<BlackIp> selectById(String id) {
         try {
             BlackIp blackIp = blackIpService.selectById(id);
-            if (blackIp != null) {
+            if (ObjectUtil.isNotNull(blackIp)) {
                 return R.ok(blackIp);
             }
         } catch (Exception e) {
@@ -79,7 +80,7 @@ public class BlackIpApi implements BlackIpClient {
     public R<BlackIp> selectByIp(String ip) {
         try {
             BlackIp blackIp = blackIpService.selectByIp(ip);
-            if (blackIp != null) {
+            if (ObjectUtil.isNotNull(blackIp)) {
                 return R.ok(blackIp);
             }
         } catch (Exception e) {
@@ -91,9 +92,12 @@ public class BlackIpApi implements BlackIpClient {
     @Override
     public R<Page<BlackIp>> list(BlackIpDto blackIpDto) {
         try {
-            Page<BlackIp> list = blackIpService.list(blackIpDto);
-            if (list != null) {
-                return R.ok(list);
+            if (ObjectUtil.isEmpty(blackIpDto)) {
+                blackIpDto = new BlackIpDto();
+            }
+            Page<BlackIp> page = blackIpService.list(blackIpDto);
+            if (ObjectUtil.isNotNull(page)) {
+                return R.ok(page);
             }
         } catch (Exception e) {
             return R.fail(e.getMessage());
@@ -103,6 +107,10 @@ public class BlackIpApi implements BlackIpClient {
 
     @Override
     public R<Boolean> checkBlackIpValid(String ip) {
-        return null;
+        try {
+            return blackIpService.checkBlackIpValid(ip) ? R.ok() : R.fail();
+        } catch (Exception e) {
+            return R.fail(e.getMessage());
+        }
     }
 }

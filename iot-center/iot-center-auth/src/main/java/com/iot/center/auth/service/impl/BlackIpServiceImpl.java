@@ -1,5 +1,6 @@
 package com.iot.center.auth.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -51,7 +52,7 @@ public class BlackIpServiceImpl extends ServiceImpl<BlackIpMapper, BlackIp> impl
     )
     public BlackIp add(BlackIp blackIp) {
         BlackIp select = selectByIp(blackIp.getId());
-        if (select != null) {
+        if (ObjectUtil.isNotNull(select)) {
             throw new ServiceException("The ip already exists in the blacklist");
         }
         if (baseMapper.insert(blackIp) > 0) {
@@ -89,7 +90,7 @@ public class BlackIpServiceImpl extends ServiceImpl<BlackIpMapper, BlackIp> impl
     public BlackIp update(BlackIp blackIp) {
         blackIp.setIp(null).setUpdateTime(null);
         if (blackIpMapper.updateById(blackIp) > 0) {
-            BlackIp select = selectById(blackIp.getId());
+            BlackIp select = blackIpMapper.selectById(blackIp.getId());
             select.setIp(blackIp.getIp());
             return select;
         }
@@ -133,7 +134,7 @@ public class BlackIpServiceImpl extends ServiceImpl<BlackIpMapper, BlackIp> impl
     @Override
     public Boolean checkBlackIpValid(String ip) {
         BlackIp select = selectByIp(ip);
-        if (select != null) {
+        if (ObjectUtil.isNotNull(select)) {
             return select.getEnable();
         }
         return false;

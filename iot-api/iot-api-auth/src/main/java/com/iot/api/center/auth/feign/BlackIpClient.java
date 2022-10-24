@@ -87,7 +87,7 @@ public interface BlackIpClient {
      * @description 查询ip是否在黑名单中
      * @date
      */
-    @GetMapping("/check/ip")
+    @GetMapping("/check/{ip}")
     R<Boolean> checkBlackIpValid(@NotNull @PathVariable(value = "ip") String ip);
 
 }
