@@ -1,0 +1,35 @@
+server:
+  port: 8400
+
+spring:
+  application:
+    name: iot-center-manager
+  profiles:
+    active:
+      - server
+      - register
+      - monitor
+      - rabbitmq
+      - mysql
+      - mongo
+      - redis
+      - feign
+      - nacos
+      - dev
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+  redis:
+    database: 2
+  cache:
+    redis:
+      time-to-live: 12H
+logging:
+  level:
+    com.iot: DEBUG
+  file:
+    name: iot/logs/center/manager/${spring.application.name}.log
