@@ -37,6 +37,8 @@ public class DeviceDto extends Device implements Converter<Device, DeviceDto> {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Pages page;
 
+    private String profiledId;
+
     @Override
     public void convertDtoToDo(Device device) {
         BeanUtils.copyProperties(this, device);

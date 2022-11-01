@@ -6,6 +6,8 @@ import com.iot.center.manager.service.ProfileBindService;
 import com.iot.common.model.ProfileBind;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 /**
  * <p>
  * 设备与模版映射关联表 服务实现类
@@ -17,4 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProfileBindServiceImpl extends ServiceImpl<ProfileBindMapper, ProfileBind> implements ProfileBindService {
 
+    @Override
+    public Set<String> selectProfileIdsByDeviceId(String deviceId) {
+        return null;
+    }
 }

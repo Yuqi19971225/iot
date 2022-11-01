@@ -2,7 +2,10 @@ package com.iot.center.manager.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.iot.common.model.Point;
 import com.iot.common.model.Profile;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,4 +17,5 @@ import com.iot.common.model.Profile;
  */
 public interface ProfileService extends IService<Profile> {
 
+    List<Point> selectByProfileId(String profileId);
 }

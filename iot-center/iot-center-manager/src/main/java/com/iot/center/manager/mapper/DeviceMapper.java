@@ -1,7 +1,9 @@
 package com.iot.center.manager.mapper;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.iot.common.model.Device;
 
 /**
@@ -14,4 +16,5 @@ import com.iot.common.model.Device;
  */
 public interface DeviceMapper extends BaseMapper<Device> {
 
+    Page<Device> selectPageWithProfile(Page<Object> convert, LambdaQueryWrapper<Device> customFuzzyQuery, String profiledId);
 }
