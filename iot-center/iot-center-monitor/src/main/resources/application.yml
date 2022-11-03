@@ -1,0 +1,27 @@
+server:
+  port: 8200
+
+spring:
+  application:
+    name: iot-center-monitor
+  profiles:
+    active:
+      - server
+      - nacos
+      - monitor
+      - dev
+  boot:
+    admin:
+      context-path: /
+      ui:
+        title: IOT Monitor Center
+        public-url: /
+        favicon: /monitor/images/icon/favicon.ico
+        favicon-danger: /monitor/images/icon/favicon-danger.ico
+        brand: <img src="/monitor/images/logo/dc3-logo.png"><span>DC3 Monitor Center</span>
+
+logging:
+  level:
+    com.iot: DEBUG
+  file:
+    name: iot/logs/center/monitor/${spring.application.name}.log
